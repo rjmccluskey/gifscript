@@ -1,8 +1,51 @@
 body {
-  padding: 50px;
   font: 14px "Lucida Grande", Helvetica, Arial, sans-serif;
 }
 
 a {
   color: #00B7FF;
+}
+
+.container {
+  margin: 0 5% 0 5%;
+}
+
+/* message window */
+#chat_window {
+  height: 600px;
+  border:1px solid black;
+}
+#messages {
+  list-style-type: none;
+  margin: 0;
+  padding: 0;
+}
+#messages li {
+  padding: 5px 10px;
+}
+#messages li:nth-child(odd) {
+  background: #eee;
+}
+
+
+
+/* chat bar */
+#chat_form {
+  background: #000;
+  padding: 3px;
+  position: fixed;
+  bottom: 0;
+  width: 100%;
+}
+#chat_input {
+  border: 0;
+  padding: 10px;
+  width: 85%;
+  margin-right: .5%;
+}
+#chat_button {
+  width: 9%;
+  background: rgb(130, 224, 255);
+  border: none;
+  padding: 10px;
 }
