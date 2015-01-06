@@ -1,4 +1,8 @@
 extends layout
 
 block content
-  p hello chat
+  div#chat_window
+    ul#messages
+  form#chat_form
+    input#chat_input(autocomplete="off")
+    button#chat_button Send
