@@ -11,4 +11,9 @@ router.get('/chat', function(req, res) {
   res.render('chat', { title: 'GIFScript' })
 })
 
+/* GET GIF form */
+router.get('/gifs/new', function(req, res) {
+  res.render('gif_form')
+})
+
 module.exports = router;
