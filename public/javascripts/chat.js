@@ -1,7 +1,7 @@
 var socket = io()
 
 $(document).ready(function(){
-  addChatListeners()
+  addEventListeners()
 
   socket.on('chat message', appendMessage)
 })
@@ -10,12 +10,14 @@ $(document).ready(function(){
 
 
 
-function emitMessage() {
+function emitMessage(event) {
   // emits the message to all users
-  getGIFSearchForm()
+  if ($('#get_gif_window').length === 0) {
+    getGIFSearchForm()
 
-  socket.emit('chat message', $('#chat_input').val())
-  clearInput()
+    // socket.emit('chat message', $('#chat_input').val())
+    // clearInput()
+  }
   return false
 }
 
@@ -29,13 +31,11 @@ function appendMessage(msg) {
   $('#messages').append($('<li>').text(msg))
 }
 
-function addChatListeners() {
+function addEventListeners() {
   $('#chat_form').on('submit', emitMessage)
+  $('body').on('submit','#search_giphy_form', getGiphyGIFs)
 }
 
-function addGIFSearchListeners(){
-  $('#search_giphy_form')
-}
 
 function getGIFSearchForm() {
   $.ajax({
@@ -43,5 +43,16 @@ function getGIFSearchForm() {
     url: '/gifs/new'
   }).done(function(data){
     $('body').append(data)
+  })
+}
+
+function getGiphyGIFs(event) {
+  event.preventDefault()
+  $.ajax({
+    type: 'GET',
+    url: '/gifs/search?giphysearch=' + $('#search_giphy_input').val(),
+  }).done(function(data){
+    console.log(data)
+    $('#get_gif_window').append(data)
   })
 }
