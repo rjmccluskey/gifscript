@@ -72,8 +72,7 @@ a {
   height: 20px;
 }
 
-.giphy_results {
+.gif {
   height: 100px;
-  width: 100px;
-  background-size: contain;
+  width: auto;
 }
