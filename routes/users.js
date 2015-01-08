@@ -7,6 +7,21 @@ var router = express.Router();
 //   res.send('respond with a resource');
 // });
 
+router.get('/', function(req,res) {
+  var user
+  if (req.session.user_id) {
+    user = models.User.find({
+      where: { id: req.session.user_id }
+    }).then(function(user) {
+      res.send('Hello ' + user.username + '!')
+      user.destroy()
+    })
+  }
+  else {
+    res.send('No user signed in!')
+  }
+})
+
 /* Create new user after signing up and redirect to chat room */
 router.post('/signup', function(req, res) {
   var username = req.param('username')
@@ -19,7 +34,9 @@ router.post('/signup', function(req, res) {
     models.User.find({
       where: { username: username }
     }).then(function() {
-      console.log(user.id)
+      req.session.user_id = user.id
+    }).then(function() {
+      res.redirect('/users')
     })
   })
 })
