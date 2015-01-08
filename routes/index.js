@@ -20,15 +20,12 @@ router.get('/gifs/new', function(req, res) {
 /* GET GIFs from Giphy search */
 router.get('/gifs/search', function(req,res) {
   var queryString = req.query.giphysearch.split(" ").join("+")
-  var giphyKey = process.env.GIPHY_PUBLIC_KEY
-  var giphySearchURL = 'http://api.giphy.com/v1/gifs/search?q=' + queryString + '&api_key=' + giphyKey
+  var giphySearchURL = 'http://api.giphy.com/v1/gifs/search?q=' + queryString + '&api_key=dc6zaTOxFJmzC'
 
   rest.get(giphySearchURL).on('complete', function(data) {
-    // console.log(data.data[0].images.downsized.url)
     var gifs = data.data
     var firstTenGIFs = []
-    console.log(data)
-    for (var i = 0; i <= gifs.length -1 && i <= 9; i++) {
+    for (var i = 0; i <= gifs.length -1 && i <= 19; i++) {
       firstTenGIFs.push(gifs[i].images.downsized.url)
     }
     res.render('giphy_results', { urls: firstTenGIFs })
