@@ -23,12 +23,12 @@ router.get('/gifs/search', function(req,res) {
   var giphySearchURL = 'http://api.giphy.com/v1/gifs/search?q=' + queryString + '&api_key=dc6zaTOxFJmzC'
 
   rest.get(giphySearchURL).on('complete', function(data) {
-    var gifs = data.data
-    var firstTenGIFs = []
-    for (var i = 0; i <= gifs.length -1 && i <= 19; i++) {
-      firstTenGIFs.push(gifs[i].images.downsized.url)
+    var allGIFs = data.data
+    var results = []
+    for (var i = 0; i <= allGIFs.length -1 && i <= 19; i++) {
+      results.push(allGIFs[i].images.downsized.url)
     }
-    res.render('giphy_results', { urls: firstTenGIFs })
+    res.render('giphy_results', { urls: results })
   })
 })
 
