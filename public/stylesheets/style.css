@@ -10,6 +10,22 @@ a {
   margin: 0 5% 0 5%;
 }
 
+
+/* home page login/signup forms */
+.home_form {
+  margin: 30px 0 30px 0;
+}
+
+.home_form input {
+  display: block;
+  width: 250px;
+}
+
+.home_form input[type="submit"] {
+  width: 256px;
+}
+
+
 /* message window */
 #chat_window {
   height: 600px;
