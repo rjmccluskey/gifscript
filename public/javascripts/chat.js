@@ -4,6 +4,7 @@ $(document).ready(function(){
   addEventListeners()
 
   socket.on('chat message', appendMessage)
+  socket.on('notification', appendNotification)
 })
 
 function addEventListeners() {
@@ -15,6 +16,10 @@ function addEventListeners() {
 function appendMessage(msg) {
   // appends message to chat window
   $('#messages').append(msg)
+}
+
+function appendNotification(msg) {
+  $('#messages').append($('<li>').text(msg))
 }
 
 
@@ -32,9 +37,6 @@ function resetChatInput() {
   $('#get_gif_window').remove()
   $('#chat_input').val('')
 }
-
-
-
 
 function getGIFSearchForm() {
   $.ajax({
@@ -57,7 +59,7 @@ function getGiphyGIFs(event) {
 
 function emitMessage() {
   var url = $(this).attr('src')
-  var message = '<li><img src="' + url + '" class="gif"><p>' + $('#chat_input').val() + '</p></li>'
+  var message = '<li><p>' + $('#chat_input').val() + '</p><img src="' + url + '" class="gif"></li>'
   console.log(url)
   console.log(message)
 

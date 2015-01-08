@@ -5,7 +5,7 @@ module.exports = function(io) {
     console.log('a user connected')
     userCount++
     console.log(userCount + ' user(s) connected')
-    io.emit('chat message', '** a user connected ** (total users: ' + userCount + ')')
+    io.emit('notification', '** a user connected ** (total users: ' + userCount + ')')
 
     socket.on('chat message', function(msg){
       io.emit('chat message', msg)
@@ -15,7 +15,7 @@ module.exports = function(io) {
       console.log('a user disconnected')
       userCount--
       console.log(userCount + ' user(s) connected')
-      io.emit('chat message', '** a user disconnected ** (total users: ' + userCount + ')')
+      io.emit('notification', '** a user disconnected ** (total users: ' + userCount + ')')
     })
   })
 }

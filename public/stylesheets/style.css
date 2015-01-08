@@ -64,6 +64,7 @@ a {
   right: 0;
   border: 1px solid red;
   background: black;
+  overflow: scroll;
 }
 
 #search_giphy_input {
