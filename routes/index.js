@@ -9,7 +9,12 @@ router.get('/', function(req, res) {
 
 /* GET chat room */
 router.get('/chat', function(req, res) {
-  res.render('chat', { title: 'GIFScript' })
+  if (req.session.username) {
+    res.render('chat', { title: 'GIFScript' })
+  }
+  else {
+    res.redirect('/')
+  }
 })
 
 /* GET GIF form */

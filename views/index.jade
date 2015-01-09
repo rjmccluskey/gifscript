@@ -7,5 +7,19 @@ html
   body
     div.container
       h1 Welcome to #{title}!
-      form(action="/chat" method="GET")
-        button#join Join the Chatroom
+      form#signup_form.home_form(action="/users/signup" method="POST")
+        input(autocomplete="off" placeholder="Enter a username" name="username")
+        input(autocomplete="off" placeholder="Pick a password" type="password" name="password1")
+        input(autocomplete="off" placeholder="Enter your password again" type="password" name="password2")
+        input(type="submit" value="Sign Up")
+      form#login_form.home_form(action="/users/login" method="GET")
+        input(autocomplete="off" placeholder="Enter your username" name="username")
+        input(autocomplete="off" placeholder="Enter your password" type="password" name="password")
+        input(type="submit" value="Log In")
+      if errors
+        ul#validation_errors
+          each error in errors
+            li= error
+
+
+
