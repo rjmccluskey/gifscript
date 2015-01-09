@@ -7,7 +7,7 @@ a {
 }
 
 .container {
-  margin: 0 5% 0 5%;
+  /*margin: 0 5% 0 5%;*/
 }
 
 
@@ -36,7 +36,11 @@ a {
 
 /* message window */
 #chat_window {
-  height: 600px;
+  height: 500px;
+  width: 600px;
+  left: 0;
+  right: 0;
+  margin: auto;
   border:1px solid black;
   overflow: scroll;
 }
@@ -56,7 +60,7 @@ a {
 
 /* chat bar */
 #chat_form {
-  background: #000;
+  background: red;
   padding: 3px;
   position: fixed;
   bottom: 0;
@@ -65,15 +69,41 @@ a {
 #chat_input {
   border: 0;
   padding: 10px;
-  width: 85%;
-  margin-right: .5%;
+  width: 90%;
+  text-align: center;
+  margin-top: 5px;
+  margin-bottom: 5px;
 }
-#chat_button {
-  width: 9%;
-  background: rgb(130, 224, 255);
-  border: none;
-  padding: 10px;
+
+.colorCycle {
+  background-color: #66FF66;
+  text-align: center;
+  animation-name: homeCycle;
+  animation-duration:6s;
+  animation-direction:alternate;
+  animation-iteration-count:infinite;
+
+  -webkit-animation-name: homeCycle;
+  -webkit-animation-duration:6s;
+  -webkit-animation-direction:alternate;
+  -webkit-animation-iteration-count:infinite; }
+
+  @keyframes homeCycle
+  {
+  0% {background-color:#66FF66;}
+  25% {background-color:#66FFFF;}
+  50% {background-color:#FF0066;}
+  75% {background-color:#FFFF66;}
+  }
+
+  @-webkit-keyframes homeCycle
+  {
+  0% {background-color:#66FF66;}
+  25% {background-color:#66FFFF;}
+  50% {background-color:#FF0066;}
+  75% {background-color:#FFFF66;}
 }
+
 
 
 /* get GIF window */
