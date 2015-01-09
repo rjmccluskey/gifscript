@@ -25,6 +25,14 @@ a {
   width: 256px;
 }
 
+#validation_errors {
+  list-style-type: none;
+}
+
+#validation_errors li {
+  color: red;
+}
+
 
 /* message window */
 #chat_window {

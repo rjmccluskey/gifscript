@@ -17,9 +17,9 @@ html
         input(autocomplete="off" placeholder="Enter your password" type="password" name="password")
         input(type="submit" value="Log In")
       if errors
-        ul
+        ul#validation_errors
           each error in errors
-            li.validation_errors= error
+            li= error
 
 
 
