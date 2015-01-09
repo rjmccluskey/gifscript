@@ -43,7 +43,7 @@ router.get('/login', function(req,res) {
   }).then(function(){
     if (errors.length === 0) {
       req.session.username = username
-      res.redirect('/users')
+      res.redirect('/chat')
     }
     else {
       res.render('index', {title: 'GIFScript', errors: errors})
