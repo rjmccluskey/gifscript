@@ -16,3 +16,10 @@ html
         input(autocomplete="off" placeholder="Enter your username" name="username")
         input(autocomplete="off" placeholder="Enter your password" type="password" name="password")
         input(type="submit" value="Log In")
+      if errors
+        ul
+          each error in errors
+            li.validation_errors= error
+
+
+

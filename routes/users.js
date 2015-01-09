@@ -8,13 +8,8 @@ var router = express.Router();
 // });
 
 router.get('/', function(req,res) {
-  var user
-  if (req.session.user_id) {
-    user = models.User.find({
-      where: { id: req.session.user_id }
-    }).then(function(user) {
-      res.send('Hello ' + user.username + '!')
-    })
+  if (req.session.username) {
+    res.send('Hello ' + req.session.username + '!')
   }
   else {
     res.send('No user signed in!')
@@ -26,32 +21,48 @@ router.post('/signup', function(req, res) {
   var username = req.param('username')
   var password1 = req.param('password1')
   var password2 = req.param('password2')
+  var existingUser
+  var errors = []
 
-  if ( password1 === password2 ) {
-    models.User.create({
-      username: username,
-      password: password1
-    })
-    .then(function(user) {
-      // if success
-      models.User.find({
-        where: { username: username }
-      }, function(error) {
-        // if fail
-        console.log(error)
-        res.redirect('/')
-      })
-      .then(function() {
-        req.session.user_id = user.id
-      }).done(function() {
+  models.User.find({
+    where:{username: username}
+  }).then(function(user){
+    existingUser = user
+  }).then(function(){
+    if (password1 != password2) {
+      errors.push('Passwords do not match')
+    }
+  }).then(function(){
+    if (existingUser) {
+      errors.push('Username already taken')
+    }
+  }).then(function(){
+    if (username === "") {
+      errors.push("Username can't be blank")
+    }
+  }).then(function(){
+    if (password1 === "" && password2 === "") {
+      errors.push('A password is required')
+    }
+  }).then(function(){
+    if ((password1 != "" && password2 === "") || (password2 != "" && password1 === "")) {
+      errors.push('Please enter your password twice')
+    }
+  }).then(function(){
+    if (errors.length === 0) {
+      models.User.create({
+        username: username,
+        password: password1
+      }).then(function(){
+        req.session.username = username
+      }).done(function(){
         res.redirect('/users')
       })
-    })
-  }
-  else {
-    res.redirect('/')
-  }
-
+    }
+    else {
+      res.render('index', {title: 'GIFScript', errors: errors})
+    }
+  })
 })
 
 module.exports = router;
