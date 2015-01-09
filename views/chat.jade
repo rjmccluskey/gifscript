@@ -3,6 +3,5 @@ extends layout
 block content
   div#chat_window
     ul#messages
-  form#chat_form
-    input#chat_input(autocomplete="off")
-    button#chat_button Send
+  form#chat_form.colorCycle
+    input#chat_input(autocomplete="off" placeholder="What do you have to say?")

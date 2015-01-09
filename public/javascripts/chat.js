@@ -16,10 +16,12 @@ function addEventListeners() {
 function appendMessage(msg) {
   // appends message to chat window
   $('#messages').append(msg)
+  scrollChatWindow()
 }
 
 function appendNotification(msg) {
   $('#messages').append($('<li>').text(msg))
+  scrollChatWindow()
 }
 
 
@@ -65,4 +67,15 @@ function emitMessage() {
 
   socket.emit('chat message', message)
   resetChatInput()
+}
+
+function scrollChatWindow() {
+  var height = 0;
+  $('#messages li').each(function(i, value){
+      height += parseInt($(this).height());
+  });
+
+  height += '';
+
+  $('#chat_window').animate({scrollTop: height});
 }
