@@ -10,7 +10,7 @@ router.get('/', function(req, res) {
 /* GET chat room */
 router.get('/chat', function(req, res) {
   if (req.session.username) {
-    res.render('chat', { title: 'GIFScript' })
+    res.render('chat', { username: req.session.username })
   }
   else {
     res.redirect('/')

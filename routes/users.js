@@ -3,15 +3,15 @@ var express = require('express');
 var router = express.Router();
 
 
-
-router.get('/', function(req,res) {
-  if (req.session.username) {
-    res.send('Hello ' + req.session.username + '!')
-  }
-  else {
-    res.send('No user signed in!')
-  }
-})
+// FOR TESTING PURPOSES
+// router.get('/', function(req,res) {
+//   if (req.session.username) {
+//     res.send('Hello ' + req.session.username + '!')
+//   }
+//   else {
+//     res.send('No user signed in!')
+//   }
+// })
 
 /* Login an existing user */
 router.get('/login', function(req,res) {
@@ -43,7 +43,7 @@ router.get('/login', function(req,res) {
   }).then(function(){
     if (errors.length === 0) {
       req.session.username = username
-      res.redirect('/users')
+      res.redirect('/chat')
     }
     else {
       res.render('index', {title: 'GIFScript', errors: errors})

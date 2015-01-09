@@ -2,9 +2,11 @@ var socket = io()
 
 $(document).ready(function(){
   addEventListeners()
+  var me = $('#user').val()
+  socket.emit('login', me)
 
+  socket.on('login', appendUser)
   socket.on('chat message', appendMessage)
-  socket.on('notification', appendNotification)
 })
 
 function addEventListeners() {
@@ -13,14 +15,18 @@ function addEventListeners() {
   $('body').on('click','.giphy_result', emitMessage)
 }
 
+function appendUser(user) {
+  if (me != user) {
+    $('#users').append($('<li>').text(user))
+  }
+  $('#messages').append($('<li>').text('***' + user + 'has connected ***'))
+}
+
 function appendMessage(msg) {
   // appends message to chat window
   $('#messages').append(msg)
 }
 
-function appendNotification(msg) {
-  $('#messages').append($('<li>').text(msg))
-}
 
 
 
@@ -66,3 +72,4 @@ function emitMessage() {
   socket.emit('chat message', message)
   resetChatInput()
 }
+
